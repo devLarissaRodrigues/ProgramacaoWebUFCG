@@ -60,13 +60,71 @@ function inversorDeTexto(){
 
 function ordenaLista(){
     var numeros = document.getElementById("numerosDigitados").value;
-    numeros = numeros.split(",");
+    numeros = numeros.split(",").map(Number);
 
-    let menor = numeros[0];
-    for(i=1; i<numeros.length; i++){
-        if(numeros[i] < menor){
-            menor = numeros[i];
+    numeros.sort((a, b) => a - b);
+    numeros.join(", ");
+    alert("A lista ordenada é " + numeros);
+}    
+
+function somadorMultiplosDeTres(){
+    var numeros = document.getElementById("numerosDigitados").value;
+    numeros = numeros.split(",").map(Number);
+    let soma = 0;
+    let numerosSoma = [];
+
+    for(i=0; i<numeros.length; i++){
+        if((numeros[i] % 2 != 0) && (numeros[i] % 3 == 0)){
+            soma += numeros[i];
+            numerosSoma.push(numeros[i]);
         }
     }
-    alert(menor);
+    alert("Os números ímpares múltiplos de 3 digitados foram: " + numerosSoma + ". A soma deles é igual a " + soma);
+}
+
+function analisadorDeNumeros(){
+    var numeros = document.getElementById("numerosDigitados").value;
+    numeros = numeros.split(",").map(Number);
+    let soma = 0;
+    let media;
+    var positivos = 0;
+    let negativos = 0;
+    let porcentualPositivos;
+    let porcentualNegativos;
+
+    for(i=0; i<numeros.length; i++){
+        soma += numeros[i];
+        if(numeros[i] >= 0){
+            positivos++;
+        }
+        else{
+            negativos++;
+        }
+    }
+    media = soma/numeros.length;
+    porcentualPositivos = (positivos / numeros.length) * 100;
+    porcentualNegativos = (negativos / numeros.length) * 100;
+    alert("A média dos valores digitados é " + media.toFixed(2));
+    alert("Há " + positivos + " números positivos, ou seja, " + porcentualPositivos.toFixed(2) + "% dos números da lista");
+    alert("Há " + negativos + " números negativos, ou seja, " + porcentualNegativos.toFixed(2) + "% dos números da lista");
+}
+
+function inversorDeNumeros(){
+    var numeros = document.getElementById("numerosDigitados").value;
+    numeros = numeros.split(",").map(Number);
+    
+    let listaInvertida = numeros.reverse();
+    let resultado = listaInvertida.join(",");
+    alert("A lista invertida dos números digitados é: " + resultado);
+}
+
+function fatorial(){
+    var numero = parseInt(document.getElementById("numeroDigitado").value);
+    if (numero == 0) return 1;
+    let resultado = 1;
+
+    for (let i = 1; i <= numero; i++) {
+        resultado *= i;
+    }
+    alert("O fatorial de " + numero + " é " + resultado);
 }
